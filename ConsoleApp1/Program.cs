@@ -54,8 +54,9 @@ namespace ConsoleApp1
             }
         }*/
 
-        static int[] GetArrayFromConsole(int num = 5)
+        static int[] GetArrayFromConsole(ref int num)
         {
+            num = 6;
             var result = new int[num];
             for (int i = 0; i < result.Length; i++)
             {
@@ -64,7 +65,32 @@ namespace ConsoleApp1
             }
             return result;
         }
-        static int[] SortArray (int[] sort)
+        static void SortArray (int[] sort, out int[] sorteddesc, out int[] sortedasc)
+        {
+            sorteddesc = SortArrayDesc(sort);
+            ShowArray(sort, true);
+            Console.WriteLine();
+            sortedasc = SortArrayAsc(sort);
+            ShowArray(sort, true);
+        }
+        static int[] SortArrayDesc (int[] sort)
+        {
+            int temp = 0;
+            for (int i = 0; i < sort.Length; i++)
+            {
+                for (int j = i + 1; j < sort.Length; j++)
+                {
+                    if (sort[i] < sort[j])
+                    {
+                        temp = sort[i];
+                        sort[i] = sort[j];
+                        sort[j] = temp;
+                    }
+                }
+            }
+            return sort;
+        }
+        static int[] SortArrayAsc (int[] sort)
         {
             int temp = 0;
             for (int i = 0; i < sort.Length; i++)
@@ -85,7 +111,6 @@ namespace ConsoleApp1
         {
             if (sortattribute)
             {
-                SortArray(array);
                 foreach (var item in array)
                 {
                     Console.Write(item + " ");
@@ -96,6 +121,7 @@ namespace ConsoleApp1
                 Console.WriteLine("Внимание сортировка невозможны!!");
             }
         }
+
         static void Main(string[] args)
         {
             /*var (name, age) = ("Георгий", 35);
@@ -113,9 +139,12 @@ namespace ConsoleApp1
             string[] favcolors = new string[3];
             favcolors = ReadColor();
             ShowColor(name, favcolors);*/
-            int[] array = GetArrayFromConsole(10);
-            ShowArray(array, true);
-        }
+            var nam = 10;
+            int[] array = GetArrayFromConsole(ref nam);
+            int[] sorteddesc;
+            int[] sortedasc;
+            SortArray(array, out sorteddesc, out sortedasc);
+        }    
         
     }
 }
