@@ -54,7 +54,7 @@ namespace ConsoleApp1
             }
         }*/
 
-        static int[] GetArrayFromConsole(ref int num)
+       /*static int[] GetArrayFromConsole(ref int num)
         {
             num = 6;
             var result = new int[num];
@@ -120,6 +120,19 @@ namespace ConsoleApp1
             {
                 Console.WriteLine("Внимание сортировка невозможны!!");
             }
+        }*/
+        static void Echo (string saidworld, int deep)
+        {
+            var modif = saidworld;
+            if (modif.Length > 2)
+            {
+                modif = modif.Remove(0, 2);
+            }
+            Console.WriteLine("..." + modif);
+            if (deep > 1)
+            {
+                Echo(modif, deep - 1);
+            }
         }
 
         static void Main(string[] args)
@@ -139,11 +152,16 @@ namespace ConsoleApp1
             string[] favcolors = new string[3];
             favcolors = ReadColor();
             ShowColor(name, favcolors);*/
-            var nam = 10;
+            /*var nam = 10;
             int[] array = GetArrayFromConsole(ref nam);
             int[] sorteddesc;
             int[] sortedasc;
-            SortArray(array, out sorteddesc, out sortedasc);
+            SortArray(array, out sorteddesc, out sortedasc);*/
+            Console.WriteLine("Напишите что-то");
+            var str = Console.ReadLine();
+            Console.WriteLine("Укажиет глубину эха");
+            int deep = int.Parse(Console.ReadLine());
+            Echo(str, deep);
         }    
         
     }
